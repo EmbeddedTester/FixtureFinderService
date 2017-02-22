@@ -1,0 +1,20 @@
+os:
+- linux
+language: java
+jdk:
+- oraclejdk8
+sudo: false
+cache:
+  directories:
+  - "$HOME/.m2"
+before_install:
+- java -version
+script:
+- mvn clean package
+deploy:
+  provider: heroku
+  api_key:
+    secure: b8kvtORiquoeD5yj22REj6/PTkqX/BMEZf8ahaqPv99tr93q+vE/cQzfMVlRUZw+YdbcSK4SVm3waLQTxW4bhHEixts3lotLwTSqzhjOqm+2MC8SHfiJfJM1kKpqqn7xWgJ/z2b5AiD2JYl9fyjJVm9405HYLwHh+evb1hcmNZvCGi9B6kPcMwX1e8GiPZJZ0QRpaYqkBxxwbSV7/854xLtbYjpmRKYJY4lpz2Z8oneaZOm8KxuukoQfsnUHKAX475TOlB+Tqt2Q700YtHaCdhUKwFuAikKY3yagUemeWtYvheD2gKSwWcuea2uhVTovW+VcwmXwdcxBIajUm/BcVtQFns2gXLI7p+BrjEErUQ2nZ0FEvecur63g4mH+o4Tu8/PvG/jJcsI8sj9hyFOZMmT4Uo6qh9sdlQoGakhRpUZVvKBaQIjeUeIv3cyVYyI3sLVrz0BgkKMNROtb9n+eDYdKMrzUu1yu21kEZW9wPCc4spdgphdiuIrPJs1fgVSue+rm0RruMsenrS7HZ49qYf3fCJ9y8xt/Huit5l9NWRdetNi7OPHXdlnmu3CVeu7Z9O+Str+XxL763lwtlhoZCa3PBXGmivmBeEkUulIYwMnEzgDVSdE+WlnI8zIhR8GHjNI9ItyDTpcqwg8m50OR8NZ2J/RTnp30V9QPAW5xE/8=
+  app: fixture-finder-us
+  on:
+    repo: abetterway2feel/FixtureFinderService
