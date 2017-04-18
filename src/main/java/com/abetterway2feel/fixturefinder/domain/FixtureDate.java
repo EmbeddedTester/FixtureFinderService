@@ -18,7 +18,7 @@ public class FixtureDate implements Comparable<FixtureDate> {
     }
 
     public String getTime() {
-        return utcKickOffTime.format(DateTimeFormatter.ofPattern("hh:mm"));
+        return utcKickOffTime.format(DateTimeFormatter.ofPattern("HH:mm"));
     }
 
     @Override

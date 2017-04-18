@@ -1,7 +1,7 @@
-package com.abetterway2feel.fixturefinder.competitions;
+package com.abetterway2feel.fixturefinder.fixture;
 
 import com.abetterway2feel.fixturefinder.FixtureFinder;
-import com.abetterway2feel.fixturefinder.repository.MatchDayRepository;
+import com.abetterway2feel.fixturefinder.repository.fixtures.FixtureRepository;
 import io.restassured.RestAssured;
 import org.hamcrest.Matchers;
 import org.junit.Before;
@@ -16,7 +16,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import static io.restassured.RestAssured.when;
 
 @SuppressWarnings("WeakerAccess") //Spring injections means intellij can't deal with this
-@ActiveProfiles("behaviour-test")
+@ActiveProfiles({"behaviour-test", "fixtures-local"})
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = {FixtureFinder.class}, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class FixturesSpec {
@@ -25,7 +25,7 @@ public class FixturesSpec {
     int port;
 
     @Autowired
-    MatchDayRepository competitionRepository;
+    FixtureRepository competitionRepository;
 
     @Before
     public void setUp() {
@@ -34,11 +34,12 @@ public class FixturesSpec {
 
     @Test
     public void returnTheFixturesForToday() {
+        //Given that today is 2017-04-09 see BehaviourTestConfig.provideClock
         when()
                 .get("/fixtures")
                 .then()
                 .statusCode(200)
-                .body("fixtures.size()", Matchers.is(2));
+                .body("fixtures.size()", Matchers.is(3));
     }
 
     @Test
@@ -47,7 +48,24 @@ public class FixturesSpec {
                 .get("/fixtures/2017-03-31")
                 .then()
                 .statusCode(200)
-                .body("fixtures.size()", Matchers.is(1));
+                .body("fixtures.size()", Matchers.is(2));
+    }
+
+    @Test
+    public void return404IfGivenMatchDateIsAnInvalidDate() {
+        when()
+                .get("/fixtures/invalid")
+                .then()
+                .statusCode(404);
+    }
+
+    @Test
+    public void returnTheFixturesForAGivenTeam() {
+        when()
+                .get("/fixtures/byTeam/Aberdeen")
+                .then()
+                .statusCode(200)
+                .body("fixtures.size()", Matchers.is(2));
     }
    
 }

@@ -1,4 +1,4 @@
-package com.abetterway2feel.fixturefinder.parser.matchday.livescore;
+package com.abetterway2feel.fixturefinder.repository.matchday.livescore;
 
 import com.abetterway2feel.fixturefinder.domain.*;
 import org.jsoup.nodes.Element;
@@ -14,7 +14,7 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
-class LiveScoreMatchDayBuilder {
+public class LiveScoreMatchDayBuilder {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 

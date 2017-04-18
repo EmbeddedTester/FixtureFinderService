@@ -44,4 +44,8 @@ public class Fixture implements Comparable<Fixture> {
     public int compareTo(Fixture that) {
         return this.fixtureDate.compareTo(that.fixtureDate);
     }
+
+    public boolean contains(Team team) {
+        return this.getHomeTeam().equals(team) || this.getAwayTeam().equals(team);
+    }
 }

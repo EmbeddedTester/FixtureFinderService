@@ -2,8 +2,6 @@ package com.abetterway2feel.fixturefinder.repository.competition;
 
 import com.abetterway2feel.fixturefinder.domain.Competition;
 import com.abetterway2feel.fixturefinder.domain.Location;
-import com.abetterway2feel.fixturefinder.repository.CompetitionKey;
-import com.abetterway2feel.fixturefinder.repository.CompetitionRepository;
 import lombok.NonNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;

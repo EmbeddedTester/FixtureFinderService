@@ -1,6 +1,6 @@
 package com.abetterway2feel.fixturefinder.rest;
 
-import com.abetterway2feel.fixturefinder.repository.CompetitionRepository;
+import com.abetterway2feel.fixturefinder.repository.competition.CompetitionRepository;
 import com.abetterway2feel.fixturefinder.rest.dto.CompetitionDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
