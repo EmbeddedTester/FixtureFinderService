@@ -1,4 +1,4 @@
-package com.abetterway2feel.fixturefinder.parser.matchday.livescore;
+package com.abetterway2feel.fixturefinder.repository.matchday.livescore;
 
 public class LiveScoreConstants {
     public static final String LIVE_SCORE_URL = "http://www.livescores.com/soccer/%s/";

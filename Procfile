@@ -1,1 +1,1 @@
-web: java -Dserver.port=$PORT -jar target/fixture-finder-*.jar --spring.profiles.active=prod
+web: java -Xms512m -Xmx512m -Dspring.profiles.active=prod,fixtures-livescore -Dserver.port=$PORT -jar target/fixture-finder-*.jar

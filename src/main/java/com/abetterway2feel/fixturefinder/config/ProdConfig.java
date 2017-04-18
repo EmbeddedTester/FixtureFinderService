@@ -1,12 +1,9 @@
-package com.abetterway2feel.fixturefinder;
+package com.abetterway2feel.fixturefinder.config;
 
 import com.abetterway2feel.fixturefinder.domain.CacheSettings;
 import com.abetterway2feel.fixturefinder.domain.Competition;
 import com.abetterway2feel.fixturefinder.domain.CompetitionType;
 import com.abetterway2feel.fixturefinder.domain.Location;
-import com.abetterway2feel.fixturefinder.parser.matchday.livescore.LiveScoreConstants;
-import com.abetterway2feel.fixturefinder.service.document.HttpMatchDayDocumentLoader;
-import com.abetterway2feel.fixturefinder.service.document.MatchDayLoader;
 import org.springframework.boot.SpringBootConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Profile;
@@ -18,7 +15,7 @@ import java.util.concurrent.TimeUnit;
 
 @Profile("prod")
 @SpringBootConfiguration
-public class LiveScoreCompetitionConfig {
+public class ProdConfig {
 
     @Bean
     public CacheSettings provideCacheSettings() {
@@ -26,7 +23,7 @@ public class LiveScoreCompetitionConfig {
     }
 
     @Bean
-    public Set<Competition> getSupportedLiveScorecompetitions() {
+    public Set<Competition> getSupportedLiveScoreCompetitions() {
         Set<Competition> supportedCompetitions = new HashSet<>();
         supportedCompetitions.addAll(Location.ENGLAND.buildStandardDomesticsFor("FA Cup", "Premier League", "Championship"));
         supportedCompetitions.addAll(Location.SCOTLAND.buildStandardDomesticsFor("Scottish Cup","Premiership", "Championship"));
@@ -39,11 +36,6 @@ public class LiveScoreCompetitionConfig {
         supportedCompetitions.add(Competition.builder().tier(1).type(CompetitionType.INTERNATIONAL_COUNTRY_CUP).location(Location.WORLD).name("World Cup").build());
 
         return supportedCompetitions;
-    }
-
-    @Bean
-    public MatchDayLoader provideMatchDayDocumentLoader() {
-        return new HttpMatchDayDocumentLoader(LiveScoreConstants.LIVE_SCORE_URL);
     }
 
     @Bean

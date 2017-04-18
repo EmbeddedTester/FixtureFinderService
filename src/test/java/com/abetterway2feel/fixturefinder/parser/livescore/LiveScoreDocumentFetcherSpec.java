@@ -1,15 +1,11 @@
 package com.abetterway2feel.fixturefinder.parser.livescore;
 
-import com.abetterway2feel.fixturefinder.domain.Competition;
-import com.abetterway2feel.fixturefinder.domain.CompetitionType;
-import com.abetterway2feel.fixturefinder.domain.Location;
-import com.abetterway2feel.fixturefinder.domain.MatchDay;
-import com.abetterway2feel.fixturefinder.parser.matchday.livescore.LiveScoreDocumentFetcher;
-import com.abetterway2feel.fixturefinder.repository.CompetitionKey;
-import com.abetterway2feel.fixturefinder.repository.CompetitionRepository;
-import com.abetterway2feel.fixturefinder.service.document.FromFileMatchDayDocumentLoader;
-import com.abetterway2feel.fixturefinder.service.document.MatchDayLoader;
-import org.jsoup.nodes.Document;
+import com.abetterway2feel.fixturefinder.domain.*;
+import com.abetterway2feel.fixturefinder.repository.competition.CompetitionKey;
+import com.abetterway2feel.fixturefinder.repository.competition.CompetitionRepository;
+import com.abetterway2feel.fixturefinder.repository.document.DocumentRepository;
+import com.abetterway2feel.fixturefinder.repository.document.LocalFileSystemDocumentRepository;
+import com.abetterway2feel.fixturefinder.repository.matchday.livescore.LiveScoreMatchDayRepository;
 import org.junit.Test;
 import org.mockito.Matchers;
 import org.mockito.Mockito;
@@ -17,15 +13,24 @@ import org.mockito.Mockito;
 import java.io.File;
 import java.time.LocalDate;
 import java.util.Optional;
+import java.util.concurrent.TimeUnit;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
 
 public class LiveScoreDocumentFetcherSpec {
-    private CompetitionRepository competitionRepository = Mockito.mock(CompetitionRepository.class);
-    private MatchDayLoader<Document> matchDayLoader = new FromFileMatchDayDocumentLoader(new File("src/main/resources/livescore").toPath(), "livescore-results-{date}.html");
 
-    private LiveScoreDocumentFetcher sut = new LiveScoreDocumentFetcher(competitionRepository, matchDayLoader);
+    private CompetitionRepository competitionRepository = Mockito.mock(CompetitionRepository.class);
+    private DocumentRepository documentRepository = new LocalFileSystemDocumentRepository(new File("src/main/resources/livescore").toPath(), "livescore-results-{date}.html");
+    private LiveScoreMatchDayRepository sut = new LiveScoreMatchDayRepository(
+            new CacheSettings(
+                    1,
+                    1,
+                    TimeUnit.SECONDS
+            ),
+            competitionRepository,
+            documentRepository
+    );
 
     @Test
     public void givenThatOnlyEnglishChampionshipIsSupported_thenOneFixtureWillBeReturnedFor20170331() {
@@ -36,8 +41,7 @@ public class LiveScoreDocumentFetcherSpec {
 
         MatchDay matchDay = sut.fetchFor(LocalDate.of(2017, 3, 31));
 
-
-        assertThat(matchDay.numberOfFixtures(), is(1));
+        assertThat(matchDay.size(), is(1));
     }
 
     @Test
@@ -49,7 +53,7 @@ public class LiveScoreDocumentFetcherSpec {
 
         MatchDay matchDay = sut.fetchFor(LocalDate.of(2017, 3, 31));
 
-        assertThat(matchDay.numberOfFixtures(), is(1));
+        assertThat(matchDay.size(), is(1));
     }
 
     @Test
@@ -71,7 +75,7 @@ public class LiveScoreDocumentFetcherSpec {
 
         MatchDay matchDay = sut.fetchFor(LocalDate.of(2017, 4, 9));
 
-        assertThat(matchDay.numberOfFixtures(), is(23));
+        assertThat(matchDay.size(), is(23));
     }
 
     //TODO test a champions league night

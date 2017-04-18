@@ -1,4 +1,4 @@
-package com.abetterway2feel.fixturefinder.service.document;
+package com.abetterway2feel.fixturefinder.repository.document;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -23,25 +23,25 @@ import java.time.format.DateTimeFormatter;
  * <p>
  * Therefore the file '/my/local/fixtures/someProvider-2017-04-29' would be loaded for that [[LocalDate]].
  */
-public class FromFileMatchDayDocumentLoader implements MatchDayLoader<Document> {
+public class LocalFileSystemDocumentRepository implements DocumentRepository {
 
     private final Path pathToFolder;
     private final String fileNameTemplate;
     private final DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
-    public FromFileMatchDayDocumentLoader(Path pathToFolder, String fileNameTemplate) {
+    public LocalFileSystemDocumentRepository(Path pathToFolder, String fileNameTemplate) {
         this.pathToFolder = pathToFolder;
         this.fileNameTemplate = fileNameTemplate;
     }
 
     @Override
-    public Document get(LocalDate matchDate) {
+    public Document get(LocalDate matchDate) throws MatchDayNotFoundException {
         File file = getFile(matchDate.format(dateFormatter));
         try {
             return Jsoup.parse(file, StandardCharsets.UTF_8.name());
         }
         catch (IOException e) {
-            throw new MatchDayLoaderException("Unable to retrieve document from " + file.getAbsolutePath(), e);
+            throw new MatchDayNotFoundException("Unable to retrieve document from " + file.getAbsolutePath(), e);
         }
 
     }

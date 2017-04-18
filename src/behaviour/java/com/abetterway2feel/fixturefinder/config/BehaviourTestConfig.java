@@ -3,14 +3,10 @@ package com.abetterway2feel.fixturefinder.config;
 import com.abetterway2feel.fixturefinder.domain.CacheSettings;
 import com.abetterway2feel.fixturefinder.domain.Competition;
 import com.abetterway2feel.fixturefinder.domain.Location;
-import com.abetterway2feel.fixturefinder.service.document.FromFileMatchDayDocumentLoader;
-import com.abetterway2feel.fixturefinder.service.document.MatchDayLoader;
 import org.springframework.boot.SpringBootConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Profile;
 
-import java.io.File;
-import java.nio.file.Path;
 import java.time.Clock;
 import java.time.LocalDate;
 import java.time.ZoneOffset;
@@ -31,16 +27,9 @@ public class BehaviourTestConfig {
     public Set<Competition> getSupportedLiveScorecompetitions() {
         Set<Competition> supportedCompetitions = new HashSet<>();
         supportedCompetitions.addAll(Location.ENGLAND.buildStandardDomesticsFor("FA Cup", "Premier League", "Championship"));
+        supportedCompetitions.addAll(Location.SCOTLAND.buildStandardDomesticsFor("Scottish Cup","Premiership", "Championship"));
 
         return supportedCompetitions;
-    }
-
-
-
-    @Bean
-    public MatchDayLoader provideMatchDayDocumentLoader() {
-        Path path = new File("src/main/resources/livescore").toPath();
-        return new FromFileMatchDayDocumentLoader(path, "livescore-results-{date}.html");
     }
 
     @Bean

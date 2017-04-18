@@ -1,7 +1,7 @@
 package com.abetterway2feel.fixturefinder.competitions;
 
 import com.abetterway2feel.fixturefinder.FixtureFinder;
-import com.abetterway2feel.fixturefinder.repository.CompetitionRepository;
+import com.abetterway2feel.fixturefinder.repository.competition.CompetitionRepository;
 import io.restassured.RestAssured;
 import org.hamcrest.Matchers;
 import org.junit.Before;
@@ -16,7 +16,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import static io.restassured.RestAssured.when;
 
 @SuppressWarnings("WeakerAccess") //Spring injections means intellij can't deal with this
-@ActiveProfiles("behaviour-test")
+@ActiveProfiles({"behaviour-test", "fixtures-local"})
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = {FixtureFinder.class}, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 
@@ -41,7 +41,7 @@ public class CompetitionsSpec {
                 .get("/competitions")
                 .then()
                 .statusCode(200)
-                .body("size()", Matchers.is(3));
+                .body("size()", Matchers.is(6));
     }
 
 }
