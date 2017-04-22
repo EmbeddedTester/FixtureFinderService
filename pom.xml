@@ -22,6 +22,7 @@
         <maven.compiler.fork>true</maven.compiler.fork>
         <spring.version>4.3.5.RELEASE</spring.version>
         <springboot.version>1.5.2.RELEASE</springboot.version>
+        <springfox.version>2.6.1</springfox.version>
     </properties>
 
     <dependencies>
@@ -74,6 +75,16 @@
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
             <version>19.0</version>
+        </dependency>
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger2</artifactId>
+            <version>${springfox.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger-ui</artifactId>
+            <version>${springfox.version}</version>
         </dependency>
 
         <!-- test dependencies -->

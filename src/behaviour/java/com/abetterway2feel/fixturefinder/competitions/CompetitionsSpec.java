@@ -2,6 +2,7 @@ package com.abetterway2feel.fixturefinder.competitions;
 
 import com.abetterway2feel.fixturefinder.FixtureFinder;
 import com.abetterway2feel.fixturefinder.repository.competition.CompetitionRepository;
+import com.abetterway2feel.fixturefinder.rest.Paths;
 import io.restassured.RestAssured;
 import org.hamcrest.Matchers;
 import org.junit.Before;
@@ -38,7 +39,7 @@ public class CompetitionsSpec {
     @Test
     public void theCompetitionsEndpointReturnsAllCompetitions() {
         when()
-                .get("/competitions")
+                .get(Paths.COMPETITIONS)
                 .then()
                 .statusCode(200)
                 .body("size()", Matchers.is(6));

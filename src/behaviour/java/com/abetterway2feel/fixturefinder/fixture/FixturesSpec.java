@@ -2,6 +2,7 @@ package com.abetterway2feel.fixturefinder.fixture;
 
 import com.abetterway2feel.fixturefinder.FixtureFinder;
 import com.abetterway2feel.fixturefinder.repository.fixtures.FixtureRepository;
+import com.abetterway2feel.fixturefinder.rest.Paths;
 import io.restassured.RestAssured;
 import org.hamcrest.Matchers;
 import org.junit.Before;
@@ -36,7 +37,7 @@ public class FixturesSpec {
     public void returnTheFixturesForToday() {
         //Given that today is 2017-04-09 see BehaviourTestConfig.provideClock
         when()
-                .get("/fixtures")
+                .get(Paths.FIXTURES)
                 .then()
                 .statusCode(200)
                 .body("fixtures.size()", Matchers.is(3));
@@ -45,7 +46,7 @@ public class FixturesSpec {
     @Test
     public void returnTheFixturesFor20170331() {
         when()
-                .get("/fixtures/2017-03-31")
+                .get(Paths.FIXTURES + "/2017-03-31")
                 .then()
                 .statusCode(200)
                 .body("fixtures.size()", Matchers.is(2));
@@ -54,7 +55,7 @@ public class FixturesSpec {
     @Test
     public void return404IfGivenMatchDateIsAnInvalidDate() {
         when()
-                .get("/fixtures/invalid")
+                .get(Paths.FIXTURES + "/invalid")
                 .then()
                 .statusCode(404);
     }
@@ -62,7 +63,7 @@ public class FixturesSpec {
     @Test
     public void returnTheFixturesForAGivenTeam() {
         when()
-                .get("/fixtures/byTeam/Aberdeen")
+                .get(Paths.FIXTURES + Paths.BY_TEAM + "/Aberdeen")
                 .then()
                 .statusCode(200)
                 .body("fixtures.size()", Matchers.is(2));

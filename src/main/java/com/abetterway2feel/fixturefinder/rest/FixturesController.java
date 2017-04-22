@@ -25,7 +25,7 @@ import java.util.stream.Collectors;
 
 @AllArgsConstructor
 @RestController
-@RequestMapping("/fixtures")
+@RequestMapping(Paths.FIXTURES)
 public class FixturesController {
     private FixtureRepository fixtureRepository;
     private MatchDayRepository matchDayRepository;
@@ -50,7 +50,7 @@ public class FixturesController {
         return new ResponseEntity<>(MatchDayDTO.createResponseFor(matchDay), HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/byTeam/{team}", method = RequestMethod.GET)
+    @RequestMapping(value = Paths.BY_TEAM + "/{team}", method = RequestMethod.GET)
     public ResponseEntity<Collection<FixtureDTO>> getFixturesByTeam(@PathVariable("team") String team) {
         LocalDateTime now = LocalDate.now().atStartOfDay();
         LocalDate start = now.minus(12, ChronoUnit.MONTHS).toLocalDate();
