@@ -10,6 +10,7 @@ public enum Location {
     WORLD,
     EUROPE,
     ENGLAND,
+    THE_UNITED_STATES,
     GERMANY,
     ITALY,
     SCOTLAND,
@@ -51,6 +52,13 @@ public enum Location {
                 .location(this)
                 .name(name)
                 .build();
+    }
+
+    public String toString(){
+        String[] words = this.name().split("_");
+        return Stream.of(words)
+                .map(word -> word.charAt(0) + word.substring(1).toLowerCase())
+        .reduce((s1, s2) -> s1 + " " + s2).orElse(name());
     }
 
 }

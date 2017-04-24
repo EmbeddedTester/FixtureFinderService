@@ -23,7 +23,7 @@ public class FixtureDTO implements Comparable<FixtureDTO> {
                 .build();
 
         return FixtureDTO.builder()
-                .country(fixture.getCompetition().getLocation().name())
+                .country(fixture.getCompetition().getLocation().toString())
                 .competition(fixture.getCompetition().getName())
                 .kickOff(kickOffDTO)
                 .homeTeam(fixture.getHomeTeam().getName())
