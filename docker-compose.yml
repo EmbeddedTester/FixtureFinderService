@@ -1,0 +1,9 @@
+web:
+  image: abetterway2feel/fixturefinderservice:v1
+  command: 'bash -c ''java -Xms512m -Xmx512m -Dspring.profiles.active=prod,fixtures-livescore -Dserver.port=8080 -jar
+  /opt/fixturefinder/bin/fixture-finder-*.jar'''
+  working_dir: /app/user
+  environment:
+    PORT: 8080
+  ports:
+    - '8080:8080'
