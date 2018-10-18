@@ -20,7 +20,6 @@ public class LiveScoreMatchDayBuilder {
 
     private static final String TIME_SEPARATOR = ":";
     private static final String MINUTE_INDICATOR = "'";
-    private static final String BLANK_SEPARATOR = " ";
 
     private LocalDate matchDate;
 
@@ -80,7 +79,8 @@ public class LiveScoreMatchDayBuilder {
             ZonedDateTime utcKickOffTime = matchDate
                     .atStartOfDay(ZoneOffset.UTC)
                     .plusHours(Integer.parseInt(time[0].trim()))
-                    .plusMinutes(Integer.parseInt(time[1].split(BLANK_SEPARATOR)[0].trim()));
+                    .plusMinutes(Integer.parseInt(time[1].substring(5).trim())
+            );
 
             return FixtureDate.builder()
                     .status(FixtureStatus.SCHEDULED)
