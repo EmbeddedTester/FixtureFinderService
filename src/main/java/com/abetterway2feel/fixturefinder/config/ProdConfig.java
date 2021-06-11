@@ -28,15 +28,16 @@ public class ProdConfig {
         supportedCompetitions.addAll(Location.ENGLAND.buildStandardDomesticsFor("FA Cup", "Premier League", "Championship"));
         supportedCompetitions.addAll(Location.SCOTLAND.buildStandardDomesticsFor("Scottish Cup","Premiership", "Championship"));
         supportedCompetitions.addAll(Location.GERMANY.buildDomesticLeaguesWithNames("Bundesliga", "2nd Bundesliga"));
+        supportedCompetitions.add(Location.ITALY.buildDomesticLeaguesWithNames("Serie A"));
         supportedCompetitions.add(Location.GERMANY.buildDomesticCupWithName("DFB Pokal").withTag("DFB Cup"));
         supportedCompetitions.addAll(Location.SPAIN.buildStandardDomesticsFor("Super Cup", "LaLiga Santander", "LaLiga 1|2|3"));
         supportedCompetitions.add(Location.SPAIN.buildDomesticCupWithName("Copa del Rey"));
-        supportedCompetitions.add(Location.ITALY.buildDomesticCupWithName("Serie A"));
+
         supportedCompetitions.add(Competition.builder().tier(1).type(CompetitionType.CONTINENTAL_CLUB_CUP).location(Location.EUROPE).name("Champions League").build());
         supportedCompetitions.add(Competition.builder().tier(2).type(CompetitionType.CONTINENTAL_CLUB_CUP).location(Location.EUROPE).name("Europa League").build());
         supportedCompetitions.add(Competition.builder().tier(1).type(CompetitionType.INTERNATIONAL_COUNTRY_CUP).location(Location.WORLD).name("World Cup").build());
         supportedCompetitions.add(Competition.builder().tier(2).type(CompetitionType.INTERNATIONAL_COUNTRY_CUP).location(Location.EUROPE).name("Euro 2020").build());
-        
+
         return supportedCompetitions;
     }
 
