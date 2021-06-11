@@ -128,6 +128,11 @@ public class LiveScoreMatchDayRepository implements MatchDayRepository {
                 return competitionRepository
                         .get(new CompetitionKey(Location.WORLD, "World Cup"))
                         .orElse(Competition.UNSUPPORTED);
+            case "Euro 2020":
+                return competitionRepository
+                       .get(new CompetitionKey(Location.EUROPE, "Euro 2020"))
+                       .orElse(Competition.UNSUPPORTED);
+
             default:
                 try {
                     Location location = Location.valueOf(firstLabel.toUpperCase());
