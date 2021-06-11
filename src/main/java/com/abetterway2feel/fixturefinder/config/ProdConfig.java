@@ -28,7 +28,7 @@ public class ProdConfig {
         supportedCompetitions.addAll(Location.ENGLAND.buildStandardDomesticsFor("FA Cup", "Premier League", "Championship"));
         supportedCompetitions.addAll(Location.SCOTLAND.buildStandardDomesticsFor("Scottish Cup","Premiership", "Championship"));
         supportedCompetitions.addAll(Location.GERMANY.buildDomesticLeaguesWithNames("Bundesliga", "2nd Bundesliga"));
-        supportedCompetitions.add(Location.ITALY.buildDomesticLeaguesWithNames("Serie A"));
+        supportedCompetitions.addAll(Location.ITALY.buildDomesticLeaguesWithNames("Serie A", "Serie B"));
         supportedCompetitions.add(Location.GERMANY.buildDomesticCupWithName("DFB Pokal").withTag("DFB Cup"));
         supportedCompetitions.addAll(Location.SPAIN.buildStandardDomesticsFor("Super Cup", "LaLiga Santander", "LaLiga 1|2|3"));
         supportedCompetitions.add(Location.SPAIN.buildDomesticCupWithName("Copa del Rey"));
